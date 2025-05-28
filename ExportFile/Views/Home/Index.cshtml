@@ -1,0 +1,54 @@
+﻿@model List<ExportFile.Models.DataModel>;
+@{
+    Layout = "_Layout";
+}
+
+@Html.Partial("ButtonExport.cshtml")
+<br />
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">No</th>
+            <th scope="col">Full Name</th>
+            <th scope="col">Birth Date</th>
+            <th scope="col">Email</th>
+            <th scope="col">Address</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Position</th>
+            <th scope="col">Salary</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @if(Model != null)
+        {
+            int i = 1;
+            foreach(var item in Model)
+            {
+                <tr>
+                    <td>@i</td>
+                    <td>@item.FullName</td>
+                    <td>@item.BirthDate.ToString("dd - MMMM - yyyy")</td>
+                    <td>@item.Email</td>
+                    <td>@item.Address</td>
+                    <td>@item.Phone</td>
+                    <td>@item.Gender</td>
+                    <td>@item.Position</td>
+                    <td>@item.Salary</td>
+                </tr>
+                i++;
+            }
+        }
+
+    </tbody>
+</table>
+<style type="text/css">
+    .thead-dark{
+        background-color: #0065F8;
+        color: white;
+        
+    }
+
+</style>
+

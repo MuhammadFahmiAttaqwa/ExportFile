@@ -1,0 +1,38 @@
+﻿<div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Export
+    </button>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" data-value="Excel">Excel</a></li>
+        <li><a class="dropdown-item" data-value="Pdf">Pdf</a></li>
+    </ul>
+</div>
+<script type="text/javascript">
+    $('.dropdown-item').click(function () {
+        var selected = $(this).data('value'); 
+        var url = '@Url.Action("Export", "Home")' + '?Or=' + selected;
+
+        var fileName = selected === 'Excel' ? 'DownloadExcel.xlsx' : 'DownloadPdf.pdf';
+
+        $.ajax({
+            url: url,
+            type: 'GET',
+            xhrFields: {
+                responseType: 'blob'
+            },
+            success: function (data) {
+                var blob = new Blob([data]);
+                var link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.download = fileName;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            },
+            error: function (xhr) {
+                alert('Gagal mengunduh file: ' + (xhr.responseText || 'Unknown error'));
+            }
+        });
+    });
+
+</script>
