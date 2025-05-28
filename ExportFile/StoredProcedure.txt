@@ -1,0 +1,17 @@
+﻿USE [PORTO]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_GetData]    Script Date: 29/05/2025 04:48:49 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[sp_GetData]
+AS
+BEGIN
+    WITH DataModel AS (
+        SELECT 
+            FullName, Email, BirthDate, Address, Phone, Gender, Position, Salary
+        FROM Employees
+    )
+    SELECT * FROM DataModel;
+END
